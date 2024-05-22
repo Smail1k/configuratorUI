@@ -1,0 +1,5 @@
+requests~=2.31.0
+flet~=0.21.2
+googletrans~=4.0.0rc1
+passlib~=1.7.4
+pydantic~=2.6.4
