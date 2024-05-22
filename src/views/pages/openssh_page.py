@@ -5,16 +5,17 @@ from flet import *
 from googletrans import Translator
 
 from config import server_endpoint
+from src.resources.translation_dictionary import translations
 
 
 def openssh(page: Page):
-    def name_parameters(text: str):
-        for char in text:
-            if char.isupper():
-                text = text[:text.index(char)] + ' ' + text[text.index(char):]
-        translator = Translator()
-        translation = translator.translate(text, dest='ru')
-        return translation.text
+    # def name_parameters(text: str):
+    #     for char in text:
+    #         if char.isupper():
+    #             text = text[:text.index(char)] + ' ' + text[text.index(char):]
+    #     translator = Translator()
+    #     translation = translator.translate(text, dest='ru')
+    #     return translation.text
 
     def on_parameter_change(e):
         data_update = {'parameterName': e.control.data, 'parameterValue': e.control.value}
@@ -32,7 +33,7 @@ def openssh(page: Page):
                 Container(
                     content=Row(
                         controls=[
-                            Text(value=name_parameters(parameter[0]).capitalize(), size=17, weight=FontWeight.BOLD,
+                            Text(value=translations['russian'][parameter[0].lower()], size=17, weight=FontWeight.BOLD,
                                  max_lines=2, overflow="ellipsis", width=400),
                             Switch(value=parameter[1], on_change=on_parameter_change, data=parameter[0]) if parameter[1]
                             in [True, False] else TextField(value=parameter[1], width=550, text_size=17,
